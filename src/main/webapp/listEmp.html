@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap </title>
+    <!-- Bootstrap -->
+    <link href="plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/listEmp.css" rel="stylesheet">
+    <link href="plugins/z-ui-dist/css/zui.css">
+    <link href="plugins/z-ui-dist/css/zui-theme.css">
+    <link href="plugins/z-ui-dist/css/zui.lite.css">
+</head>
+<body>
+<div class="myBig-body">
+    <!--修改数据模态框-->
+    <div class="modal fade" id="updatedata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">修改员工信息</h4>
+                </div>
+
+                <div class="updateEmp">
+                    <div class="form-group">
+                        <label for="name">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 请输入姓名
+                        </label>
+                        <input name="name" v-model="empName" type="text" class="form-control" id="name" placeholder="请输入姓名" >
+                    </div>
+                    <div class="form-group">
+                        <label for="job">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入职务
+                        </label>
+                        <input name="job" v-model="empJob" type="text" class="form-control" id="job" placeholder="请输入职务">
+                    </div>
+                    <div class="form-group">
+                        <label for="idCard">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入身份证
+                        </label>
+                        <input name="idCard" v-model="empIdCard" type="text" class="form-control" id="idCard" placeholder="请输入身份证">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入用户名
+                        </label>
+                        <input name="username" v-model="empUsername" type="text" class="form-control" id="username" placeholder="请输入用户名">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入密码
+                        </label>
+                        <input name="password" v-model="empPassword" type="text" class="form-control" id="password" placeholder="请输入密码">
+                    </div>
+                    <div class="form-group">
+                        <label for="nickname">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入昵称
+                        </label>
+                        <input name="nickname" v-model="empNickname" type="text" class="form-control" id="nickname" placeholder="请输入昵称">
+                    </div>
+                    <div class="form-group">
+                        <label for="entryDate">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入入职时间
+                        </label>
+                        <input name="entryDate" v-model="empEnterTime" type="date" class="form-control" id="entryDate" placeholder="请输入入职时间">
+                    </div>
+                    <div class="form-group">
+                        <label for="birthday">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入生日
+                        </label>
+                        <input name="birthday" v-model="empBirthday" type="date" class="form-control" id="birthday" placeholder="请输入生日">
+                    </div>
+                    <div class="form-group">
+                        <label for="empId">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入工号
+                        </label>
+                        <input name="empId" v-model="empID" type="text" class="form-control" id="empId" placeholder="请输入工号">
+                    </div>
+                    <!--                <a v-on:click="updateData(da)">保存更改</a>-->
+
+                </div>
+
+
+
+                <div class="modal-footer">
+                    <button v-on:click="doUpdateEmp()" class="btn btn-info ">
+                        <span class="" aria-hidden="true"></span> 确认修改
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" >关闭</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--添加员工模态框-->
+    <div class="modal fade" id="addnewdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel1">添加新人</h4>
+                </div>
+
+                <div class="addOneEmp">
+
+                    <div class="form-group">
+                        <label for="name">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 请输入姓名
+                        </label>
+                        <input v-model="addempName" type="text" class="form-control"  placeholder="请输入姓名">
+                    </div>
+                    <div class="form-group">
+                        <label for="job">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入职务
+                        </label>
+                        <input name="job" type="text" class="form-control" v-model="addempJob" placeholder="请输入职务">
+                    </div>
+                    <div class="form-group">
+                        <label for="idCard">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入身份证
+                        </label>
+                        <input name="idCard" type="text" class="form-control" v-model="addempIdCard" placeholder="请输入身份证">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入用户名
+                        </label>
+                        <input name="username" type="text" class="form-control" v-model="addempUsername" placeholder="请输入用户名">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入密码
+                        </label>
+                        <input name="password" type="text" class="form-control" v-model="addempPassword" placeholder="请输入密码">
+                    </div>
+                    <div class="form-group">
+                        <label for="nickname">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入昵称
+                        </label>
+                        <input name="nickname" type="text" class="form-control" v-model="addempNickname" placeholder="请输入昵称">
+                    </div>
+                    <div class="form-group">
+                        <label for="entryDate">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入入职时间
+                        </label>
+                        <input name="entryDate" type="date" class="form-control" v-model="addempEnterTime" placeholder="请输入入职时间">
+                    </div>
+                    <div class="form-group">
+                        <label for="birthday">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入生日
+                        </label>
+                        <input name="birthday" type="date" class="form-control" v-model="addempBirthday" placeholder="请输入生日">
+                    </div>
+                    <div class="form-group">
+                        <label for="empId">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入工号
+                        </label>
+                        <input name="empId" type="text" class="form-control" v-model="addempID" placeholder="请输入工号">
+                    </div>
+                    <button  class="btn btn-info btn-block" v-on:click="doAddEmp()">
+                        <span class="glyphicon glyphicon-log-in" aria-hidden="true" ></span> 新增
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">人员信息</h3>
+        </div>
+
+
+        <div id="myNiceCarousel" class="carousel slide" data-ride="carousel">
+            <!-- 圆点指示器 -->
+            <ol class="carousel-indicators">
+                <li data-target="#myNiceCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myNiceCarousel" data-slide-to="1"></li>
+                <li data-target="#myNiceCarousel" data-slide-to="2"></li>
+            </ol>
+
+            <!-- 轮播项目 -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img alt="First slide" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599650563263&di=914f6bd08872c22c1f9da028115e35e1&imgtype=0&src=http%3A%2F%2Fs1.1zoom.me%2Fbig3%2F37%2FDogs_Welsh_Corgi_Trunk_tree_Glance_520800_3000x1925.jpg ">
+                    <div class="carousel-caption">
+                        <h3>第一张幻灯片</h3>
+                        <p>:)</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img alt="Second slide" src="http://openzui.com/docs/img/slide2.jpg">
+                    <div class="carousel-caption">
+                        <h3>第二张幻灯片</h3>
+                        <p>0.0</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img alt="Third slide" src="http://openzui.com/docs/img/slide3.jpg">
+                    <div class="carousel-caption">
+                        <h3>第三张幻灯片</h3>
+                        <p>最后一张咯~</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 项目切换按钮 -->
+            <a class="left carousel-control" href="#myNiceCarousel" data-slide="prev">
+                <span class="icon icon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#myNiceCarousel" data-slide="next">
+                <span class="icon icon-chevron-right"></span>
+            </a>
+        </div>
+
+
+        <div class="panel-body">
+            <form class="form-inline">
+                <button type="button" class="btn btn-success" @click="selectAll()">
+                    {{allSelect ? '取消' : '全选'}}
+                </button>
+                <button  type="button"  class="btn btn-default form-control" data-backdrop="static"
+                         data-toggle="modal" data-target="#addnewdata" data-whatever="@mdo">添加新人</button>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">姓名:</div>
+                        <input type="text" class="form-control" placeholder="搜索..." v-model="searchByName">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" @click="search(nowPage)">搜索</button>
+                <button type="button" class="btn btn-primary" @click="deleteByIds()">删除</button>
+            </form>
+        </div>
+
+
+
+            <table class="table table-hover table-striped table-bordered">
+                <tr>
+                    <td class="info">选择</td>
+                    <td class="info">序号</td>
+                    <td class="info">工号</td>
+                    <!--                <td class="active">id</td>-->
+                    <td class="info">姓名</td>
+                    <td class="info">职务</td>
+                    <td class="info">身份证</td>
+                    <td class="info">用户名</td>
+                    <td class="info">昵称</td>
+                    <td class="info">入职时间</td>
+                    <td class="info">生日</td>
+                    <td class="info">状态</td>
+
+                    <td class="info">操作</td>
+
+                </tr>
+
+                <tr v-for="(da,index) in list">
+                    <td >
+                        <input type="checkbox" v-bind:value="da.id" v-model="deleteIds" >
+                    </td>
+                    <td class="">{{index+1}}</td>
+                    <td class="">{{da.empId}}</td>
+                    <td class="">{{da.name}}</td>
+                    <td class="">{{da.job}}</td>
+                    <td class="">{{da.idCard}}</td>
+                    <td class="">{{da.username}}</td>
+                    <td class="">{{da.nickname}}</td>
+                    <td class="">{{da.entryDate}}</td>
+                    <td class="">{{da.birthday}}</td>
+                    <td class="info">{{da.state | accountState}}</td>
+
+                    <td class="">
+                        <button class="btn btn-default" v-on:click="delData(da.id)">删除</button>
+                        <button class="btn btn-default" type="button"   data-backdrop="static" v-on:click="toUpdateEmp(da)"
+                            data-toggle="modal" data-target="#updatedata" data-whatever="@mdo">修改</button>
+
+                        <button class="btn btn-danger" v-if="da.state==1" v-on:click="lockEmp(da)">锁定账号</button>
+                        <button class="btn btn-default" v-if="da.state==0" v-on:click="lockEmp(da)">解除锁定</button>
+                    </td>
+                </tr>
+            </table>
+            <div class="my-nav">
+                <nav>
+                    <ul class="pager">
+                        <li><a >
+                            <span>每页数据</span>
+                            <input style="width: 30px;text-align: center" type="text"
+                                   @blur="getPage(eachPageDataNumb)" v-model="eachPageDataNumb" ><br>
+                        </a>
+                        <li><a v-on:click="upPage()">上一页</a>
+<!--                        显示页数可以点击的-->
+<!--                        <li v-for="page in pageList">-->
+<!--                            <a href="#" v-on:click="getData(page)">{{page}}</a>-->
+<!--                        </li>-->
+                        <li >
+                            <a >第<input style="width: 30px;text-align: center" type="text"
+                                       @blur="jumpPage(nowPage)" v-model="nowPage" >页</a>
+                        </li>
+
+                        <li><a v-on:click="downPage()">下一页</a>
+
+                    </ul>
+                </nav>
+            </div>
+        <div>
+            <p style="text-align: center">为您找到{{allDataSize}}条记录  共{{pageSize}}页</p>
+        </div>
+
+        </div>
+
+</div>
+
+
+<script src="plugins/vue/vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="plugins/jq/jquery-3.5.1.min.js"></script>
+<script src="plugins/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="plugins/layer/layer.js"></script>
+<script src="js/listEmp.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap </title>
+
+    <!-- Bootstrap -->
+    <link href="plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<!--修改数据模态框-->
+<div class="modal fade" id="updateFinance" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">修改资产</h4>
+            </div>
+
+            <div class="updateFinance">
+                <div class="form-group">
+                    <label for="asset_id">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 请输资产类型id
+                    </label>
+                    <select id="asset_id" v-model="assetType_id">
+                        <option value="">未选择</option>
+                        <option :value="type.assetName"  v-for="type in listType">{{type.assetName}}</option>
+                    </select>
+                   </div>
+                <div class="form-group">
+                    <label for="job">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入财务id
+                    </label>
+                    <input name="job" v-model="financeId" type="text" class="form-control" id="job" placeholder="请输入财务id">
+                </div>
+                <div class="form-group">
+                    <label for="product">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入产品id
+                    </label>
+                    <select id="product" v-model="productId">
+                        <option value="">未选择</option>
+                        <option :value="product.assetName"  v-for="product in listProductType">{{product.name}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="empId">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入保管员id
+                    </label>
+                    <input name="empId" v-model="empId" type="text" class="form-control" id="empId" placeholder="请输入保管员id">
+                </div>
+<!--                <a v-on:click="updateData(da)">保存更改</a>-->
+                <button v-on:click="toUpdateFinance()" class="btn btn-info btn-block">
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 确认修改
+                </button>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加数据模态框-->
+<div class="modal fade" id="addnewFinance" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabe">添加资产</h4>
+            </div>
+            <div class="doAddFinance">
+                <div class="form-group">
+                    <label for="asset_i">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 请选择资产类型
+                    </label>
+                    <select id="asset_i" v-model="assetType_id">
+                        <option value="">未选择</option>
+                        <option :value="assetType.name"  v-for="assetType in listType">{{assetType.assetName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="emp_id">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入财务id
+                    </label>
+                    <input name="emp_id" v-model="financeId" type="text" class="form-control" id="emp_id" placeholder="请输入财务id">
+                </div>
+                <div class="form-group">
+                    <label for="productId">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入产品id
+                    </label>
+                    <select id="productId" v-model="productId">
+                        <option value="">未选择</option>
+                        <option :value="product.assetName"  v-for="product in listProductType">{{product.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="enter_time">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入保管员id
+                    </label>
+                    <input name="enter_time" v-model="empId" type="text" class="form-control" id="enter_time" placeholder="请输入保管员id">
+                </div>
+                <div class="form-group">
+                    <label for="state">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入状态
+                    </label>
+                    <input name="state" v-model="state" type="text" class="form-control" id="state" placeholder="请输入状态">
+                </div>
+
+                <button v-on:click="doAddEmp()" class="btn btn-info btn-block">
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 新增
+                </button>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">资产表</h3>
+    </div>
+
+    <div class="tofindtype">
+        <button  type="button"  class="btn btn-link btn-block " data-backdrop="static"
+                 data-toggle="modal" data-target="#addnewFinance" data-whatever="@mdo">添加资产</button>
+    </div>
+
+
+
+
+    <div class="my-body">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <td class="info">id</td>
+                <td class="info">资产类型</td>
+                <td class="info">财务id</td>
+                <td class="info">产品</td>
+                <td class="info">保管员id</td>
+                <td class="info">状态</td>
+                <td class="info">操作</td>
+            </tr>
+
+
+            <tr v-for="da in list">
+                <td class="info">{{da.id}}</td>
+                <td class="info">{{da.assetTypeId }}</td>
+                <td class="info">{{da.financeId}}</td>
+                <td class="info">{{da.productId}}</td>
+                <td class="info">{{da.empId}}</td>
+                <td class="info">{{da.state}}</td>
+
+
+                <td class="info tofindtype">
+                    <a v-on:click="delData(da)">删除</a>
+                    <a  type="button"   data-backdrop="static" v-on:click="toUpdateFinance(da)"
+                             data-toggle="modal" data-target="#updateFinance" data-whatever="@mdo">修改</a>
+                </td>
+            </tr>
+
+<!--            修改-->
+
+        </table>
+
+
+    </div>
+</div>
+<script src="plugins/vue/vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="plugins/jq/jquery-3.5.1.min.js"></script>
+<script src="plugins/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="js/listAssets.js"></script>
+
+
+</body>
+</html>

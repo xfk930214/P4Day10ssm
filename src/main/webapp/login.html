@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap </title>
+
+    <!-- Bootstrap -->
+    <link href="plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+
+</head>
+<body >
+<div class="panel panel-info login">
+    <div class="panel-heading">登录</div>
+    <div class="panel-body">
+
+        <div class="form-group">
+            <label for="username" v-bind:class="{ change: (username === '') }"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 用户名</label>
+            <input  type="text" class="form-control" id="username" placeholder="请输入您的用户名"  v-model="username">
+        </div>
+        <div class="form-group">
+            <label for="password" v-bind:class="{ change: (password === '') }"> <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>密码</label>
+            <input  type="password" class="form-control" id="password" placeholder="请输入您的密码" v-model="password">
+        </div>
+
+        <button type="button" class="btn btn-info btn-block" v-on:click="newDoLogin">
+            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 登录
+        </button>
+<!-- 注册-->
+<!--        <button  type="button" style="margin-left: 100px" class="btn" data-backdrop="static" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">注册新用户</button>-->
+
+        <div class="wrongidorps"  >
+            <h5>用户名或密码错误！</h5>
+        </div>
+    </div>
+</div>
+
+<!--注册(模态框弹出方式)-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">注册用户</h4>
+            </div>
+            <div class="sign-up">
+                <form>
+                    <div class="form-group">
+                        <label for="signUsername" class="control-label">请输入账号:</label>
+                        <input type="text" class="form-control" id="signUsername" v-model="signUsername">
+                    </div>
+                    <div class="form-group">
+                        <label for="signPassword1" class="control-label">请输入密码:</label>
+                        <input type="password" class="form-control" id="signPassword1" v-model="signPassword1"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="signPassword2" class="control-label">请再次输入密码:</label>
+                        <input type="password" class="form-control" id="signPassword2" v-model="signPassword2"></input>
+                    </div>
+                    <a href="/download">《用户协议须知》</a>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+<!--                                     用了vue 发起Ajax请求            在login.js中调用一个方法来注册-->
+                <button type="button" class="btn btn-primary" v-on:click="newDoSingUp()" >注册</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="plugins/jq/jquery-3.5.1.min.js"></script>
+<script src="/plugins/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="plugins/vue/vue.js"></script>
+<script src="js/login.js"></script>
+<script src="js/signUp.js"></script>
+
+
+</body>
+</html>

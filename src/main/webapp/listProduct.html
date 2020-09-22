@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap </title>
+
+    <!-- Bootstrap -->
+    <link href="plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<!--修改数据模态框-->
+<div class="modal fade" id="updateFinance" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">修改数据</h4>
+            </div>
+
+            <div class="update">
+                <div class="form-group">
+                    <label for="asset_id">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 请输产品名称
+                    </label>
+                    <input name="asset_id" v-model="name" type="text" class="form-control" id="asset_id" placeholder="请输产品名称">
+                </div>
+                <div class="form-group">
+                    <label for="emp_id">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入规格
+                    </label>
+                    <input name="emp_id" v-model="specifications" type="text" class="form-control" id="emp_id" placeholder="请输规格">
+                </div>
+                <div class="form-group">
+                    <label for="bill">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入购买时间
+                    </label>
+                    <input name="bill" v-model="buy_time" type="date" class="form-control" id="bill" placeholder="请输入购买时间">
+                </div>
+                <div class="form-group">
+                    <label for="enter_time">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入单位
+                    </label>
+                    <input name="enter_time" v-model="unit" type="text" class="form-control" id="enter_time" placeholder="请输入单位">
+                </div>
+                <div class="form-group">
+                    <label for="state">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入数量
+                    </label>
+                    <input name="state" v-model="counts" type="text" class="form-control" id="state" placeholder="请输入数量">
+                </div>
+                <div class="form-group">
+                    <label for="state">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入价格
+                    </label>
+                    <input name="state" v-model="price" type="text" class="form-control" id="state" placeholder="请输入价格">
+                </div>
+                <button v-on:click="toUpdateFinance()" class="btn btn-info btn-block">
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 确认修改
+                </button>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加数据模态框-->
+<div class="modal fade" id="addnewFinance" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabe">添加产品</h4>
+            </div>
+            <div class="doAdd">
+                <div class="form-group">
+                    <label for="asset_id">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 请输产品名称
+                    </label>
+                    <input name="asset_id" v-model="name" type="text" class="form-control" id="asset_id" placeholder="请输产品名称">
+                </div>
+                <div class="form-group">
+                    <label for="emp_id">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入规格
+                    </label>
+                    <input name="emp_id" v-model="specifications" type="text" class="form-control" id="emp_id" placeholder="请输规格">
+                </div>
+                <div class="form-group">
+                    <label for="bill">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入购买时间
+                    </label>
+                    <input name="bill" v-model="buy_time" type="date" class="form-control" id="bill" placeholder="请输入购买时间">
+                </div>
+                <div class="form-group">
+                    <label for="enter_time">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入单位
+                    </label>
+                    <input name="enter_time" v-model="unit" type="text" class="form-control" id="enter_time" placeholder="请输入单位">
+                </div>
+                <div class="form-group">
+                    <label for="state">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入数量
+                    </label>
+                    <input name="state" v-model="counts" type="text" class="form-control" id="state" placeholder="请输入数量">
+                </div>
+                <div class="form-group">
+                    <label for="state">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入价格
+                    </label>
+                    <input name="state" v-model="price" type="text" class="form-control" id="state" placeholder="请输入价格">
+                </div>
+
+                <button v-on:click="doAdd()" class="btn btn-info btn-block">
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 新增
+                </button>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">产品表</h3>
+    </div>
+
+        <button  type="button"  class="btn btn-link btn-block " data-backdrop="static"
+                 data-toggle="modal" data-target="#addnewFinance" data-whatever="@mdo">添加新产品</button>
+
+
+
+    <div class="my-body">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <td class="info">id</td>
+                <td class="info">产品名称</td>
+                <td class="info">规格</td>
+                <td class="info">购买时间</td>
+                <td class="info">单位</td>
+                <td class="info">数量</td>
+                <td class="info">单价</td>
+                <td class="info">操作</td>
+            </tr>
+
+
+            <tr v-for="da in list">
+                <td class="info">{{da.id}}</td>
+                <td class="info">{{da.name}}</td>
+                <td class="info">{{da.specifications}}</td>
+                <td class="info">{{da.buyTime}}</td>
+                <td class="info">{{da.unit}}</td>
+                <td class="info">{{da.counts}}</td>
+                <td class="info">{{da.price}}</td>
+
+
+                <td class="info">
+                    <a v-on:click="delData(da)">删除</a>
+                    <a  type="button"   data-backdrop="static" v-on:click="toUpdateFinance(da)"
+                             data-toggle="modal" data-target="#updateFinance" data-whatever="@mdo">修改</a>
+                </td>
+            </tr>
+
+<!--            修改-->
+
+        </table>
+
+
+    </div>
+</div>
+<script src="plugins/vue/vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="plugins/jq/jquery-3.5.1.min.js"></script>
+<script src="plugins/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="js/listProduct.js"></script>
+
+
+</body>
+</html>

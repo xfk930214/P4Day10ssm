@@ -1,0 +1,22 @@
+.login{
+    width: 320px;
+    margin: 100px auto 0 auto;
+}
+.login .panel-heading{
+    text-align: center;
+    color: #204D74;
+}
+/*.login label{*/
+/*    color: #ffd63e;*/
+/*}*/
+.wrongidorps{
+    text-align: center;
+    display:none;
+}
+.change{
+    color: red;
+}
+body{
+    background: url("/img/loginBG.jpg");
+    background-size:100% ;
+}

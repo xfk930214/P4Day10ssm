@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<title>upload</title>
+	</head>
+	<body>
+		说明:<input type="text" id="docs"/>
+		<br/>
+		文件:<input type="file" id="myfile"/>
+		<br/>
+		<input type="button" value="go" onclick="gogo()">
+
+		<script src="plugins/jq/jquery-3.5.1.min.js"></script>
+		<script>
+			function gogo() {
+				// 获取文件
+				var myFile = $("#myfile")[0].files[0];
+
+				// 创造Form对象
+				var formData = new FormData();
+
+				// 往对象中赋值
+				formData.append("myfile", myFile);
+				formData.append("docs", $("#docs").val());
+
+				$.ajax({
+					url: '/do-upload',
+					type: 'post',
+					data: formData,
+					dataType: 'JSON',
+
+					// 上传配置
+					contentType: false,
+					processData: false,
+
+					success: function (resp) {
+						if (resp.type){
+							alert("上传成功");
+						}else {
+							alert("上传失败");
+						}
+					},
+					error: function (resp) {
+						alert("服务器异常");
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

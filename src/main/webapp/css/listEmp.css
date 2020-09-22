@@ -1,0 +1,13 @@
+#updatedata{
+    /*width: 500px;*/
+}
+
+.addOneEmp .form-control,.updateEmp .form-control{
+    width: 400px;
+    margin-left: 100px;
+}
+
+.glyphicon{
+    margin-left: 100px;
+}
+

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap </title>
+
+    <!-- Bootstrap -->
+    <link href="plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<!--修改数据模态框-->
+<div class="modal fade" id="updateFinance" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">修改资产类型</h4>
+            </div>
+
+            <div class="updateFinance">
+                <div class="form-group">
+                    <label for="job">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 请输入资产类型
+                    </label>
+                    <input name="job" v-model="assetType" type="text" class="form-control" id="job" placeholder="请输入资产类型">
+                </div>
+
+                <button v-on:click="toUpdateFinance()" class="btn btn-info btn-block">
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 确认修改
+                </button>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加数据模态框-->
+<div class="modal fade" id="addnewFinance" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabe">添加资产类型</h4>
+            </div>
+            <div class="doAddFinance">
+                <div class="form-group">
+                    <label for="asset_id">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 请输资产类型
+                    </label>
+                    <input name="asset_id" v-model="assetType" type="text" class="form-control" id="asset_id" placeholder="请输资产类型">
+                </div>
+
+                <button v-on:click="doAddEmp()" class="btn btn-info btn-block">
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 新增
+                </button>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">资产申请</h3>
+    </div>
+
+        <button  type="button"  class="btn btn-link btn-block " data-backdrop="static"
+                 data-toggle="modal" data-target="#addnewFinance" data-whatever="@mdo">新增资产类型</button>
+
+
+
+    <div class="my-body">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <td class="info">id</td>
+                <td class="info">资产类型</td>
+                <td class="info">操作</td>
+            </tr>
+
+
+            <tr v-for="da in list">
+                <td class="info">{{da.id}}</td>
+                <td class="info">{{da.assetTypeId}}</td>
+
+                <td class="info">
+                    <a v-on:click="delData(da)">删除</a>
+                    <a  type="button"   data-backdrop="static" v-on:click="toUpdateFinance(da)"
+                             data-toggle="modal" data-target="#updateFinance" data-whatever="@mdo">修改</a>
+                </td>
+            </tr>
+
+<!--            修改-->
+
+        </table>
+
+
+    </div>
+</div>
+<script src="plugins/vue/vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="plugins/jq/jquery-3.5.1.min.js"></script>
+<script src="plugins/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="js/listAssetType.js"></script>
+
+
+</body>
+</html>

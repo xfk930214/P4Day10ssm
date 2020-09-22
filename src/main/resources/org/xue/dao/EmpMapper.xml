@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xue.dao.EmpMapper">
+
+    <insert id="add">
+        INSERT INTO emp(id, name, job, id_card, username, password, nickname, state, entry_date, birthday, emp_id)
+        VALUES (#{id},#{name}, #{job}, #{idCard}, #{username}, #{password}, #{nickname}, 1, #{entryDate}, #{birthday}, #{empId})
+    </insert>
+
+    <update id="update">
+        UPDATE emp SET name=#{name}, job=#{job}, id_card=#{idCard}, username=#{username}, password=#{password}, nickname=#{nickname}, entry_date=#{entryDate}, birthday=#{birthday}, emp_id=#{empId} WHERE id=#{id}
+    </update>
+
+    <update id="lock">
+        UPDATE emp set state=#{state} WHERE id=#{id}
+    </update>
+
+    <delete id="del">
+        DELETE FROM emp WHERE id IN (
+            <foreach collection="ids" item="id" separator=",">
+                #{id}
+            </foreach>
+        )
+    </delete>
+
+    <select id="getList" resultMap="empResultMap">
+        SELECT * FROM emp t1 <include refid="whereSql"></include>
+    </select>
+<!--    获取查询的所有数据数量-->
+    <select id="listCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM emp t1 <include refid="whereSql"></include>
+    </select>
+<!--    根据id查询一条-->
+    <select id="findByID" resultMap="empResultMap">
+        SELECT * FROM emp where id = #{id}
+    </select>
+
+    <!--    结果映射 如：model与数据库字段不一致用此-->
+    <resultMap id="empResultMap" type="org.xue.model.Emp">
+        <result column="id_card" property="idCard"></result>
+        <result column="entry_date" property="entryDate"></result>
+        <result column="emp_id" property="empId"></result>
+    </resultMap>
+
+
+    <sql id="whereSql">
+        <where>
+            <if test="name != null and name != ''">
+                AND t1.name LIKE CONCAT('%', #{name}, '%')
+            </if>
+        </where>
+    </sql>
+
+
+
+</mapper>
